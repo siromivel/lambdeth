@@ -17,7 +17,7 @@ library Lambdeth {
             mstore(lambda, cb)
 
             for { let i := 0 } lt(i, upper) { i := add(i, 1) } {
-                mstore(add(lambda, 0x04), mload(add(return_array, mul(32, add(1, i)))))                
+                mstore(add(lambda, 0x04), mload(add(return_array, mul(32, add(1, i)))))
 
                 let result := call(
                     5000,
