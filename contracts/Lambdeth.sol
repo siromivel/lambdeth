@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 
 library Lambdeth {
 
-    function map(address calluh, uint256[] memory arr, bytes4 cb) public returns (uint[] memory) {
+    function map(address sender, uint256[] memory arr, bytes4 cb) public returns (uint[] memory) {
 
         uint length = arr.length;
         uint upper  = (length + 31) / 32;
@@ -21,7 +21,7 @@ library Lambdeth {
 
                 let result := call(
                     5000,
-                    calluh,
+                    sender,
                     0,
                     return_array,
                     0x20,
