@@ -12,18 +12,16 @@ const TestHelper = zos.TestHelper
 contract('LambdethMock', function ([_, owner]) {
   beforeEach(async function () {
     this.project = await TestHelper({from: owner})
+    this.Lambdeth = await LambdethMock.new()
   })
 
   it('should transform an array', async function () {
-    const proxy = await this.project.createProxy(LambdethMock)
+    const proxy = await this.project.createProxy(Lambdeth)
     const result = await proxy.map([1, 2, 3], function(val) {
       return val * 2
     })
 
     assert.equal(7, 7, "nope")
     console.log(result)
-
-  }
-)
-
+  })
 })
