@@ -1,8 +1,13 @@
 pragma solidity ^0.5.0;
 
-
+/**
+ * @title Lambdeth
+ * @dev Helpful methods for working with arrays
+ */
 contract Lambdeth {
-
+    /**
+     * @dev Iterates an array and returns a new array with values for which the predicate returns false removed
+     */
     function filter(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
         uint filterCount = 0;
@@ -12,12 +17,12 @@ contract Lambdeth {
             (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
 
             require(success);
-            bool remove = bytesToBool(data);
+            bool keep = bytesToBool(data);
 
-            if (remove) {
-                filterCount++;
-            } else {
+            if (keep) {
                 filterArray[i - filterCount] = arr[i];
+            } else {
+                filterCount++;
             }
         }
 
@@ -31,6 +36,9 @@ contract Lambdeth {
         return returnArray;
     }
 
+    /**
+     * @dev Iterates an array and returns a new array of equal lenth containing transformed elements
+     */
     function map(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
         uint[] memory returnArray = new uint[](length);
@@ -45,6 +53,7 @@ contract Lambdeth {
         return returnArray;
     }
 
+    // Converts bytes into uint
     function sliceUint(bytes memory data, uint start) internal pure returns (uint) {
         require(data.length >= start + 32, "slicing out of range");
         uint x;
@@ -54,6 +63,7 @@ contract Lambdeth {
         return x;
     }
 
+    // Converts bytes into bool
     function bytesToBool(bytes memory data) internal pure returns(bool) {
         uint value = sliceUint(data, 0x00);
         return value == 1 ? true : false;
