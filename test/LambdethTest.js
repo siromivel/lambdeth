@@ -6,7 +6,7 @@ const zosLib = require('zos-lib')
 const zos = require('zos')
 zosLib.ZWeb3.initialize(web3.currentProvider)
 
-const Lambdeth = artifacts.require('Lambdeth')
+const Lambdeth = zosLib.Contracts.getFromLocal('Lambdeth')
 const TestHelper = zos.TestHelper
 
 contract('Lambdeth', function ([_, owner]) {
@@ -14,19 +14,14 @@ contract('Lambdeth', function ([_, owner]) {
     this.project = await TestHelper({from: owner})
   })
 
-  it('should create a proxy', async function () {
-    console.log(Lambdeth)
-    const proxy = await this.project.createProxy(Lambdeth, { contractName: 'Lambdeth' });
-    assert.equal(1, 1, "wat")
+  it('should transform an array', async function () {
+    const proxy = await this.project.createProxy(Lambdeth);
+
+    // const result = await proxy.Contracts.Lambdeth.map([1, 2, 3], function(val) {
+    //   return val * 2
+    // })
+
+    console.log(proxy)
+    assert.equal(1, 1, "Hmmmm")
   })
-
-  // it('should transform an array', async function () {
-  //   const proxy = await this.project.createProxy(this.LambdethInstance)
-  //   // const result = await proxy.map([1, 2, 3], function(val) {
-  //   //   return val * 2
-  //   // })
-
-  //   assert.equal(7, 7, "nope")
-  //   // console.log(result)
-  // })
 })
