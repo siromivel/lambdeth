@@ -3,6 +3,34 @@ pragma solidity ^0.5.0;
 
 contract Lambdeth {
 
+    function filter(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
+        uint length = arr.length;
+        uint filterCount = 0;
+        uint[] memory filterArray = new uint[](length);
+
+        for (uint i = 0; i < length; i++) {
+            (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
+
+            require(success);
+            bool remove = bytesToBool(data);
+
+            if (remove) {
+                filterCount++;
+            } else {
+                filterArray[i - filterCount] = arr[i];
+            }
+        }
+
+        length = length - filterCount;
+        uint[] memory returnArray = new uint[](length);
+
+        for (uint j = 0; j < length; j++) {
+            returnArray[j] = filterArray[j];
+        }
+
+        return returnArray;
+    }
+
     function map(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
         uint[] memory returnArray = new uint[](length);
@@ -17,12 +45,17 @@ contract Lambdeth {
         return returnArray;
     }
 
-    function sliceUint(bytes memory bs, uint start) internal pure returns (uint) {
-        require(bs.length >= start + 32, "slicing out of range");
+    function sliceUint(bytes memory data, uint start) internal pure returns (uint) {
+        require(data.length >= start + 32, "slicing out of range");
         uint x;
         assembly {
-            x := mload(add(bs, add(0x20, start)))
+            x := mload(add(data, add(0x20, start)))
         }
         return x;
+    }
+
+    function bytesToBool(bytes memory data) internal pure returns(bool) {
+        uint value = sliceUint(data, 0x00);
+        return value == 1 ? true : false;
     }
 }
