@@ -6,7 +6,7 @@ pragma solidity ^0.5.0;
  */
 contract Lambdeth {
     /**
-     * @dev Iterates an array and returns a new array with values for which the predicate returns false removed
+     * @dev Iterates an array and returns a new array with values for which the predicate returns false
      */
     function filter(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
