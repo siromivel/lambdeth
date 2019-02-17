@@ -3,36 +3,26 @@ pragma solidity ^0.5.0;
 
 contract Lambdeth {
 
-    function map(address sender, uint256[] memory arr, bytes4 cb) public returns (uint[] memory) {
-
+    function map(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
-        uint upper  = (length + 31) / 32;
+        uint[] memory returnArray = new uint[](length);
 
-        assembly {
-            let return_array := mload(0x40)
-            mstore(return_array, 0x20)
-            mstore(add(return_array, 32), length)
+        for (uint i = 0; i < length; i++) {
+            (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
 
-            let lambda := mload(0x40)
-            mstore(lambda, cb)
-
-            for { let i := 0 } lt(i, upper) { i := add(i, 1) } {
-                mstore(add(lambda, 0x04), mload(add(return_array, mul(32, add(1, i)))))
-
-                let result := call(
-                    5000,
-                    sender,
-                    0,
-                    return_array,
-                    0x20,
-                    return_array,
-                    0x20
-                )
-
-                let transformed := mload(result)
-
-                mstore(0x40, add(transformed, add(0x20, mul(i, 0x20))))
-            }
+            require(success);
+            returnArray[i] = sliceUint(data, 0x00);
         }
+
+        return returnArray;
+    }
+
+    function sliceUint(bytes memory bs, uint start) internal pure returns (uint) {
+        require(bs.length >= start + 32, "slicing out of range");
+        uint x;
+        assembly {
+            x := mload(add(bs, add(0x20, start)))
+        }
+        return x;
     }
 }
