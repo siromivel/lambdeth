@@ -56,16 +56,16 @@ contract Lambdeth {
     // Converts bytes into uint
     function sliceUint(bytes memory data, uint start) internal pure returns (uint) {
         require(data.length >= start + 32, "slicing out of range");
-        uint x;
+        uint val;
         assembly {
-            x := mload(add(data, add(0x20, start)))
+            val := mload(add(data, add(0x20, start)))
         }
-        return x;
+        return val;
     }
 
     // Converts bytes into bool
     function bytesToBool(bytes memory data) internal pure returns(bool) {
-        uint value = sliceUint(data, 0x00);
-        return value == 1 ? true : false;
+        uint val = sliceUint(data, 0x00);
+        return val == 1 ? true : false;
     }
 }
