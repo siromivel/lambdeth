@@ -20,15 +20,17 @@ contract('Lambdeth', function ([_, owner]) {
   })
 
   it('should transform an array', async function () {
+    const expected = [1**2, 2**2, 3**2, 300**2, 7000**2, 16**2, 32**2, 64**2, 128**2, 0**2]
     const result = await this.lambdethTest.testMap(this.lambeth.address)
 
-    expect(transformSolidityArray(result)).to.eql([1, 4, 9])
+    expect(transformSolidityArray(result)).to.eql(expected)
   })
 
   it('should filter an array', async function() {
+    const expected = [1, 3]
     const result = await this.lambdethTest.testFilter(this.lambeth.address)
 
-    expect(transformSolidityArray(result)).to.eql([1, 3])
+    expect(transformSolidityArray(result)).to.eql(expected)
   })
 })
 
