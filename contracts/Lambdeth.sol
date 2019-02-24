@@ -53,6 +53,28 @@ contract Lambdeth {
         return returnArray;
     }
 
+
+    /**
+     * @dev Returns an array containing no more than 1 entry for any value
+     */
+    function unique(address caller, uint[] memory arr) public view returns (uint[] memory) {
+        uint length = arr.length;
+        uint[] memory returnArray = new uint[](length);
+        mapping(uint => bool) existingValues;
+
+        for (uint i = 0; i < length; i++) {
+            uint value = arr[i];
+
+            if (!existingValues[value]) {
+                returnArray.push(value);
+            }
+
+            existingValues[arr[i]] = true;
+        }
+
+        return returnArray;
+    }
+
     // Converts bytes into uint
     function sliceUint(bytes memory data, uint start) internal pure returns (uint) {
         require(data.length >= start + 32, "slicing out of range");

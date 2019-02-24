@@ -41,6 +41,22 @@ contract LambdethTest {
         return lambdeth.map(address(this), testArr, this.square.selector);
     }
 
+    function testUnique(Lambdeth lambdeth) public view returns (uint[] memory) {
+        uint[] memory testArr = new uint[](10);
+        testArr[0] = 1;
+        testArr[1] = 5;
+        testArr[2] = 1;
+        testArr[3] = 13;
+        testArr[4] = 13;
+        testArr[5] = 17;
+        testArr[6] = 21;
+        testArr[7] = 0;
+        testArr[8] = 17;
+        testArr[9] = 0;
+
+        return lambdeth.unique(address(this), testArr);
+    }
+
     function square(uint n) public pure returns (uint) {
         return n ** 2;
     }
