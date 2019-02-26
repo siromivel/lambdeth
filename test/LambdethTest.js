@@ -18,7 +18,14 @@ contract('Lambdeth', function ([_, owner]) {
     this.lambdethTest = await LambdethTest.new({ gas: 5000000 })
   })
 
-  it('should transform an array', async function () {
+  it('should concatenate two arrays', async function() {
+    const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10];
+    const result = await this.lambdethTest.testConcat(this.lambdeth.address);
+
+    expect(transformSolidityArray(result)).to.eql(expected);
+  });
+
+  it('should transform an array', async function() {
     const expected = [1**2, 2**2, 3**2, 300**2, 7000**2, 16**2, 32**2, 64**2, 128**2, 0**2]
     const result = await this.lambdethTest.testMap(this.lambdeth.address)
 

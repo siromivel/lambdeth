@@ -9,6 +9,27 @@ contract Lambdeth {
     /**
      * @dev Iterates an array and returns true if the specified value is present in the array
      */
+    function concat(uint[] memory arr1, uint[] memory arr2) public pure returns (uint[] memory) {
+        uint length1 = arr1.length;
+        uint length2 = arr2.length;
+        uint finalLength = length1 + length2;
+
+        uint[] memory returnArray = new uint[](finalLength);
+
+        for (uint i = 0; i < length1; i++) {
+            returnArray[i] = arr1[i];
+        }
+
+        for (uint j = 0; j < length2; j++) {
+            returnArray[length1 + j] = arr2[j];
+        }
+
+        return returnArray;
+    }
+
+    /**
+     * @dev Iterates an array and returns true if the specified value is present in the array
+     */
     function contains(uint[] memory arr, uint value) public pure returns (bool) {
         uint length = arr.length;
 

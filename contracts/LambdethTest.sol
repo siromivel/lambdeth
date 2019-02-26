@@ -9,6 +9,25 @@ import './Lambdeth.sol';
  */
 contract LambdethTest {
 
+    function testConcat(Lambdeth lambdeth) public pure returns (uint[] memory) {
+        uint[] memory testArr1 = new uint[](5);
+        testArr1[0] = 1;
+        testArr1[1] = 2;
+        testArr1[2] = 3;
+        testArr1[3] = 4;
+        testArr1[4] = 5;
+
+        uint[] memory testArr2 = new uint[](6);
+        testArr2[0] = 6;
+        testArr2[1] = 7;
+        testArr2[2] = 8;
+        testArr2[3] = 9;
+        testArr2[4] = 0;
+        testArr2[5] = 10;
+
+        return lambdeth.concat(testArr1, testArr2);
+    }
+
     function testContains(Lambdeth lambdeth) public pure returns (bool[] memory) {
         uint[] memory testArr = new uint[](10);
         testArr[0] = 1;
