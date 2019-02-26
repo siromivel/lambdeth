@@ -6,6 +6,9 @@ Currently deployed to Ropsten through ZeppelinOS at proxy address `0xC729f82F798
 
 ## Methods
 
+### Concat
+Returns a new array containing all elements from two input arrays.
+
 ### Contains
 Returns true if a specified value is present in the array and false if not.
 
