@@ -5,6 +5,7 @@ pragma solidity ^0.5.0;
  * @dev Helpful methods for working with arrays
  */
 contract Lambdeth {
+
     /**
      * @dev Iterates an array and returns a new array with values for which the predicate returns false
      */
@@ -37,6 +38,18 @@ contract Lambdeth {
     }
 
     /**
+     * @dev Iterates an array and returns true if the specified value is present in the array
+     */
+    function find(uint[] memory arr, uint value) public view returns (bool) {
+        uint length = arr.length;
+
+        for (uint i = 0; i < length; i++) {
+            if (arr[i] == value) return true;
+        }
+        return false;
+    }
+
+    /**
      * @dev Iterates an array and returns a new array of equal lenth containing transformed elements
      */
     function map(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
@@ -53,23 +66,19 @@ contract Lambdeth {
         return returnArray;
     }
 
-
     /**
      * @dev Returns an array containing no more than 1 entry for any value
      */
-    function unique(address caller, uint[] memory arr) public view returns (uint[] memory) {
+    function unique(uint[] memory arr) public view returns (uint[] memory) {
         uint length = arr.length;
         uint[] memory returnArray = new uint[](length);
-        mapping(uint => bool) existingValues;
 
         for (uint i = 0; i < length; i++) {
             uint value = arr[i];
 
-            if (!existingValues[value]) {
+            if (!this.find(returnArray, value)) {
                 returnArray.push(value);
             }
-
-            existingValues[arr[i]] = true;
         }
 
         return returnArray;

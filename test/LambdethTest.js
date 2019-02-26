@@ -6,7 +6,6 @@ const zosLib = require('zos-lib')
 const zos = require('zos')
 zosLib.ZWeb3.initialize(web3.currentProvider)
 
-// const Lambdeth = zosLib.Contracts.getFromLocal('Lambdeth')
 const Lambdeth = artifacts.require('Lambdeth')
 const LambdethTest = artifacts.require('LambdethTest')
 const TestHelper = zos.TestHelper
