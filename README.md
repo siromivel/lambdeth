@@ -6,12 +6,17 @@ Currently deployed to Ropsten through ZeppelinOS at proxy address `0xC729f82F798
 
 ## Methods
 
+### Contains
+Returns true if a specified value is present in the array and false if not.
+
 ### Map
-Iterates an array and returns a new array of equal lenth containing transformed elements
+Returns a new array of equal lenth containing transformed elements.
 
 ### Filter
-Iterates an array and returns a new array with values for which the predicate returns false
+Returns a new array with values for which the predicate returns false.
 
+### Unique
+Returns a new array containing only 1 copy of each value present in the original array.
 ____________________________________________________________________________________________________________________________________
 # Usage
 
