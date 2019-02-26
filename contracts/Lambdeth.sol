@@ -7,6 +7,18 @@ pragma solidity ^0.5.0;
 contract Lambdeth {
 
     /**
+     * @dev Iterates an array and returns true if the specified value is present in the array
+     */
+    function contains(uint[] memory arr, uint value) public pure returns (bool) {
+        uint length = arr.length;
+
+        for (uint i = 0; i < length; i++) {
+            if (arr[i] == value) return true;
+        }
+        return false;
+    }
+
+    /**
      * @dev Iterates an array and returns a new array with values for which the predicate returns false
      */
     function filter(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
@@ -31,18 +43,6 @@ contract Lambdeth {
     }
 
     /**
-     * @dev Iterates an array and returns true if the specified value is present in the array
-     */
-    function find(uint[] memory arr, uint value) public pure returns (bool) {
-        uint length = arr.length;
-
-        for (uint i = 0; i < length; i++) {
-            if (arr[i] == value) return true;
-        }
-        return false;
-    }
-
-    /**
      * @dev Iterates an array and returns a new array of equal lenth containing transformed elements
      */
     function map(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
@@ -53,7 +53,7 @@ contract Lambdeth {
             (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
 
             require(success);
-            returnArray[i] = sliceUint(data, 0x00);
+            returnArray[i] = bytesToUint(data, 0x00);
         }
 
         return returnArray;
@@ -70,7 +70,7 @@ contract Lambdeth {
         for (uint i = 0; i < length; i++) {
             uint value = arr[i];
 
-            if (!this.find(returnArray, value)) {
+            if (!this.contains(returnArray, value)) {
                 returnArray[i - offset] = value;
             } else {
                 offset++;
@@ -80,20 +80,20 @@ contract Lambdeth {
         return trim(length - offset, returnArray);
     }
 
+    // Converts bytes into bool
+    function bytesToBool(bytes memory data) internal pure returns(bool) {
+        uint val = bytesToUint(data, 0x00);
+        return val == 1 ? true : false;
+    }
+
     // Converts bytes into uint
-    function sliceUint(bytes memory data, uint start) internal pure returns (uint) {
+    function bytesToUint(bytes memory data, uint start) internal pure returns (uint) {
         require(data.length >= start + 32, "slicing out of range");
         uint val;
         assembly {
             val := mload(add(data, add(0x20, start)))
         }
         return val;
-    }
-
-    // Converts bytes into bool
-    function bytesToBool(bytes memory data) internal pure returns(bool) {
-        uint val = sliceUint(data, 0x00);
-        return val == 1 ? true : false;
     }
 
     // Returns a trimmed array

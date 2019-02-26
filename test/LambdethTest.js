@@ -32,8 +32,8 @@ contract('Lambdeth', function ([_, owner]) {
     expect(transformSolidityArray(result)).to.eql(expected)
   })
 
-  it('should find a value in an array', async function() {
-    const result = await this.lambdethTest.testFind(this.lambdeth.address);
+  it('should return true if an array contains the passed value', async function() {
+    const result = await this.lambdethTest.testContains(this.lambdeth.address);
 
     expect(result).to.eql([true, false]);
   });
