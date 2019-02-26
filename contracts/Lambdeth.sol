@@ -11,7 +11,7 @@ contract Lambdeth {
      */
     function filter(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
-        uint filterCount = 0;
+        uint offset = 0;
         uint[] memory filterArray = new uint[](length);
 
         for (uint i = 0; i < length; i++) {
@@ -21,26 +21,19 @@ contract Lambdeth {
             bool keep = bytesToBool(data);
 
             if (keep) {
-                filterArray[i - filterCount] = arr[i];
+                filterArray[i - offset] = arr[i];
             } else {
-                filterCount++;
+                offset++;
             }
         }
 
-        length = length - filterCount;
-        uint[] memory returnArray = new uint[](length);
-
-        for (uint j = 0; j < length; j++) {
-            returnArray[j] = filterArray[j];
-        }
-
-        return returnArray;
+        return trim(length - offset, filterArray);
     }
 
     /**
      * @dev Iterates an array and returns true if the specified value is present in the array
      */
-    function find(uint[] memory arr, uint value) public view returns (bool) {
+    function find(uint[] memory arr, uint value) public pure returns (bool) {
         uint length = arr.length;
 
         for (uint i = 0; i < length; i++) {
@@ -71,17 +64,20 @@ contract Lambdeth {
      */
     function unique(uint[] memory arr) public view returns (uint[] memory) {
         uint length = arr.length;
+        uint offset = 0;
         uint[] memory returnArray = new uint[](length);
 
         for (uint i = 0; i < length; i++) {
             uint value = arr[i];
 
             if (!this.find(returnArray, value)) {
-                returnArray.push(value);
+                returnArray[i - offset] = value;
+            } else {
+                offset++;
             }
         }
 
-        return returnArray;
+        return trim(length - offset, returnArray);
     }
 
     // Converts bytes into uint
@@ -98,5 +94,16 @@ contract Lambdeth {
     function bytesToBool(bytes memory data) internal pure returns(bool) {
         uint val = sliceUint(data, 0x00);
         return val == 1 ? true : false;
+    }
+
+    // Returns a trimmed array
+    function trim(uint length, uint[] memory arr) internal pure returns(uint[] memory) {
+        uint[] memory returnArray = new uint[](length);
+
+        for (uint i = 0; i < length; i++) {
+            returnArray[i] = arr[i];
+        }
+
+        return returnArray;
     }
 }
