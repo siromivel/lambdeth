@@ -81,6 +81,22 @@ contract LambdethTest {
         return lambdeth.map(address(this), testArr, this.square.selector);
     }
 
+    function testSlice(Lambdeth lambdeth) public view returns (uint[] memory) {
+        uint[] memory testArr = new uint[](10); 
+        testArr[0] = 1;
+        testArr[1] = 2;
+        testArr[2] = 3;
+        testArr[3] = 300;
+        testArr[4] = 7000;
+        testArr[5] = 16;
+        testArr[6] = 32;
+        testArr[7] = 64;
+        testArr[8] = 128;
+        testArr[9] = 0;
+
+        return lambdeth.slice(testArr, 3, 7);
+    }
+
     function testUnique(Lambdeth lambdeth) public view returns (uint[] memory) {
         uint[] memory testArr = new uint[](10);
         testArr[0] = 1;

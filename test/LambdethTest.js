@@ -45,6 +45,13 @@ contract('Lambdeth', function ([_, owner]) {
     expect(result).to.eql([true, false]);
   });
 
+  it('should slice an array', async function() {
+    const expected = [300, 7000, 16, 32];
+    const result = await this.lambdethTest.testSlice(this.lambdeth.address);
+
+    expect(transformSolidityArray(result)).to.eql(expected);
+  });
+
   it('should unique an array', async function() {
     const expected = [1, 5, 13, 17, 21, 10];
     const result = await this.lambdethTest.testUnique(this.lambdeth.address);

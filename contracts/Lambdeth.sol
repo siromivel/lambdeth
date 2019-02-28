@@ -81,6 +81,21 @@ contract Lambdeth {
     }
 
     /**
+     * @dev Returns a sub-array of the input array inclusive of start end exclusive of end
+     **/
+    function slice(uint[] memory arr, uint start, uint end) public pure returns (uint[] memory) {
+        require(end > start);
+        uint sliceLength = end - start;
+        uint[] memory returnArray = new uint[](sliceLength);
+
+        for (uint i = 0; i < sliceLength; i++) {
+            returnArray[i] = arr[i + start];
+        }
+
+        return returnArray;
+    }
+
+    /**
      * @dev Returns an array containing no more than 1 entry for any value
      */
     function unique(uint[] memory arr) public view returns (uint[] memory) {
