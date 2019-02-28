@@ -18,6 +18,9 @@ Returns a new array of equal lenth containing transformed elements.
 ### Filter
 Returns a new array with values for which the predicate returns false.
 
+### Slice
+Returns a new array containing a specified subset of the original array.
+
 ### Unique
 Returns a new array containing only 1 copy of each value present in the original array.
 ____________________________________________________________________________________________________________________________________
