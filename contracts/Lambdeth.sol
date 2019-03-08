@@ -50,7 +50,7 @@ contract Lambdeth {
         for (uint i = 0; i < length; i++) {
             (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
 
-            require(success);
+            require(success, "callback failed");
             bool keep = bytesToBool(data);
 
             if (keep) {
@@ -73,7 +73,7 @@ contract Lambdeth {
         for (uint i = 0; i < length; i++) {
             (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
 
-            require(success);
+            require(success, "callback failed");
             returnArray[i] = bytesToUint(data, 0x00);
         }
 
@@ -84,7 +84,7 @@ contract Lambdeth {
      * @dev Returns a sub-array of the input array inclusive of start end exclusive of end
      **/
     function slice(uint[] memory arr, uint start, uint end) public pure returns (uint[] memory) {
-        require(end > start);
+        require(end > start, "start must be before end");
         uint sliceLength = end - start;
         uint[] memory returnArray = new uint[](sliceLength);
 

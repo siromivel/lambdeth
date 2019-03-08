@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import './Lambdeth.sol';
+import "./Lambdeth.sol";
 
 
 /**
@@ -81,7 +81,7 @@ contract LambdethTest {
         return lambdeth.map(address(this), testArr, this.square.selector);
     }
 
-    function testSlice(Lambdeth lambdeth) public view returns (uint[] memory) {
+    function testSlice(Lambdeth lambdeth) public pure returns (uint[] memory) {
         uint[] memory testArr = new uint[](10); 
         testArr[0] = 1;
         testArr[1] = 2;
