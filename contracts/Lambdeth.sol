@@ -119,7 +119,9 @@ contract Lambdeth {
     // Converts bytes into bool
     function bytesToBool(bytes memory data) internal pure returns(bool) {
         uint val = bytesToUint(data, 0x00);
-        return val == 1 ? true : false;
+        require(val == 0 || val == 1, "Predicate returned non-boolean value");
+
+        return val == 1;
     }
 
     // Converts bytes into uint
