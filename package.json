@@ -23,5 +23,12 @@
   },
   "devDependencies": {
     "chai": "^4.2.0"
-  }
+  },
+  "files": [
+    "build",
+    "contracts",
+    "test",
+    "zos.json",
+    "zos.*.json"
+  ]
 }
