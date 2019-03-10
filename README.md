@@ -2,8 +2,6 @@
 
 Lambdeth is a functional library built in Solidity. It uses tools from ZeppelinOS and Truffle.
 
-Currently deployed to Ropsten through ZeppelinOS at proxy address `0xC729f82F798cA120d2b31215cB0a1322811Af9D1`.
-
 ## Methods
 
 ### Concat
