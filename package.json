@@ -1,6 +1,6 @@
 {
   "name": "lambdeth",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Functional Programming Library for the EVM",
   "main": "index.js",
   "scripts": {
