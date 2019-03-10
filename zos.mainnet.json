@@ -1,0 +1,30 @@
+{
+  "contracts": {
+    "Lambdeth": {
+      "address": "0x35769a834Cb66FAC53fae482994a3942D9A2fE4F",
+      "constructorCode": "608060405234801561001057600080fd5b506112ce806100206000396000f3fe",
+      "bodyBytecodeHash": "f96de8f5a74e886f03fcac1bbb0a4958b6ba72932f4cdd74358e32c01cee9c04",
+      "localBytecodeHash": "129c47b8a09a635257ff9ac7db743cbad96f12f9d0dd228da30eceee3e54844c",
+      "deployedBytecodeHash": "129c47b8a09a635257ff9ac7db743cbad96f12f9d0dd228da30eceee3e54844c",
+      "types": {},
+      "storage": [],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {},
+  "zosversion": "2.2",
+  "version": "0.1.0",
+  "app": {
+    "address": "0x50442F004952D5736534CC128856A49150E34bbB"
+  },
+  "package": {
+    "address": "0x51d79AC0DD05e485fd74C205FC14dB640814705A"
+  }
+}
