@@ -62,7 +62,7 @@ contract LambdethTest {
         testArr[8] = 128;
         testArr[9] = 0;
 
-        return lambdeth.filter(address(this), testArr, this.isNotAPowerOfTwo.selector);
+        return lambdeth.filter(testArr, this.isNotAPowerOfTwo.selector);
     }
 
     function testMap(Lambdeth lambdeth) public view returns (uint[] memory) {
@@ -78,7 +78,7 @@ contract LambdethTest {
         testArr[8] = 128;
         testArr[9] = 0;
 
-        return lambdeth.map(address(this), testArr, this.square.selector);
+        return lambdeth.map(testArr, this.square.selector);
     }
 
     function testSlice(Lambdeth lambdeth) public pure returns (uint[] memory) {

@@ -42,13 +42,13 @@ contract Lambdeth {
     /**
      * @dev Iterates an array and returns a new array with values for which the predicate returns false
      */
-    function filter(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
+    function filter(uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
         uint offset = 0;
         uint[] memory filterArray = new uint[](length);
 
         for (uint i = 0; i < length; i++) {
-            (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
+            (bool success, bytes memory data) = msg.sender.staticcall(abi.encodeWithSelector(cb, arr[i]));
 
             require(success, "callback failed");
             bool keep = bytesToBool(data);
@@ -66,12 +66,12 @@ contract Lambdeth {
     /**
      * @dev Iterates an array and returns a new array of equal lenth containing transformed elements
      */
-    function map(address caller, uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
+    function map(uint[] memory arr, bytes4 cb) public view returns (uint[] memory) {
         uint length = arr.length;
         uint[] memory returnArray = new uint[](length);
 
         for (uint i = 0; i < length; i++) {
-            (bool success, bytes memory data) = caller.staticcall(abi.encodeWithSelector(cb, arr[i]));
+            (bool success, bytes memory data) = msg.sender.staticcall(abi.encodeWithSelector(cb, arr[i]));
 
             require(success, "callback failed");
             returnArray[i] = bytesToUint(data, 0x00);
