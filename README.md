@@ -4,22 +4,24 @@ Lambdeth is a functional library built in Solidity. It uses tools from ZeppelinO
 
 ## Methods
 
-### Concat
+### concat(uint[], uint[])
 Returns a new array containing all elements from two input arrays.
 
-### Contains
+### contains(uint[], uint value)
 Returns true if a specified value is present in the array and false if not.
 
-### Map
-Returns a new array of equal lenth containing transformed elements.
-
-### Filter
+### filter(uint[], bytes4 callback)
 Returns a new array with values for which the predicate returns false.
+Callback must be passed as a bytes4 function selector.
 
-### Slice
-Returns a new array containing a specified subset of the original array.
+### map(uint[], bytes4 callback)
+Returns a new array of equal lenth containing transformed elements.
+Callback must be passed as a bytes4 function selector and must return a bool.
 
-### Unique
+### slice(uint[], uint start, uint end)
+Returns a new array containing a specified subset of the original array; inclusive of start and exclusive of end.
+
+### unique(uint[])
 Returns a new array containing only 1 copy of each value present in the original array.
 ____________________________________________________________________________________________________________________________________
 # Usage
