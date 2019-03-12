@@ -1,7 +1,7 @@
 {
   "contracts": {
     "Lambdeth": {
-      "address": "0xA6C8a3293f748e4ce0e83974D7738d912D0147C0",
+      "address": "0xCd1EFb36fd04BB893BE81E1cb233698d312b7DEE",
       "constructorCode": "608060405234801561001057600080fd5b50611178806100206000396000f3fe",
       "bodyBytecodeHash": "d8ef132f69d8345da3940af5d298fbb69f5d017b02e74f79eeaf8633a7225c5d",
       "localBytecodeHash": "1078cd7a22afd1f021363d6903309f15a67cabe486dd8e506d796d66d11fa0d8",
@@ -21,15 +21,15 @@
   "proxies": {
     "lambdeth/Lambdeth": [
       {
-        "address": "0x37dE8af025ccFAF0bbE74Ae704fe740D52DaEC84",
+        "address": "0x8C897A9a7B3C51AeD14C639F1aFCB315A18B9e75",
         "version": "0.2.1",
-        "implementation": "0xA6C8a3293f748e4ce0e83974D7738d912D0147C0"
+        "implementation": "0xCd1EFb36fd04BB893BE81E1cb233698d312b7DEE"
       }
     ]
   },
   "zosversion": "2.2",
   "version": "0.2.1",
   "proxyAdmin": {
-    "address": "0x562f40C0d5b832541F02c369552016b904452daA"
+    "address": "0x5325cFAe41f23dD217D6e5Ee78D74B2C022a1b89"
   }
 }
