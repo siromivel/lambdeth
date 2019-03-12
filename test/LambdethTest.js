@@ -2,27 +2,23 @@
 process.env.NODE_ENV = 'test'
 
 const assert = require('chai').expect
-const zosLib = require('zos-lib')
 const zos = require('zos')
-zosLib.ZWeb3.initialize(web3.currentProvider)
 
 const Lambdeth = artifacts.require('Lambdeth')
 const LambdethTest = artifacts.require('LambdethTest')
-const TestHelper = zos.TestHelper
 
 contract('Lambdeth', function ([_, owner]) {
   beforeEach(async function () {
-    this.project = await TestHelper({from: owner})
 
     this.lambdeth = await Lambdeth.new({ gas: 5000000 })
     this.lambdethTest = await LambdethTest.new({ gas: 5000000 })
   })
 
   it('should concatenate two arrays', async function() {
-    const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10];
-    const result = await this.lambdethTest.testConcat(this.lambdeth.address);
+    const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10]
+    const result = await this.lambdethTest.testConcat(this.lambdeth.address)
 
-    expect(transformSolidityArray(result)).to.eql(expected);
+    expect(transformSolidityArray(result)).to.eql(expected)
   });
 
   it('should transform an array', async function() {
@@ -40,23 +36,26 @@ contract('Lambdeth', function ([_, owner]) {
   })
 
   it('should return true if an array contains the passed value', async function() {
-    const result = await this.lambdethTest.testContains(this.lambdeth.address);
+    const result = await this.lambdethTest.testContains(this.lambdeth.address)
 
-    expect(result).to.eql([true, false]);
+    expect(result).to.eql([true, false])
   });
 
   it('should slice an array', async function() {
-    const expected = [300, 7000, 16, 32];
-    const result = await this.lambdethTest.testSlice(this.lambdeth.address);
+    const expected = [300, 7000, 16, 32]
+    const result = await this.lambdethTest.testSlice(this.lambdeth.address)
 
-    expect(transformSolidityArray(result)).to.eql(expected);
+    expect(transformSolidityArray(result)).to.eql(expected)
   });
 
   it('should unique an array', async function() {
-    const expected = [1, 5, 13, 17, 21, 10];
-    const result = await this.lambdethTest.testUnique(this.lambdeth.address);
+    let expected = [1, 5, 13, 17, 21, 10, 0]
+    let result = await this.lambdethTest.testUnique(this.lambdeth.address)
+    expect(transformSolidityArray(result)).to.eql(expected)
 
-    expect(transformSolidityArray(result)).to.eql(expected);
+    expected = [2, 1, 0]
+    result = await this.lambdethTest.testUniqueWithTrailingZero(this.lambdeth.address)
+    expect(transformSolidityArray(result)).to.eql(expected)
   });
 })
 

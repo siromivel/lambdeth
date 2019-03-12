@@ -105,9 +105,10 @@ contract Lambdeth {
 
         for (uint i = 0; i < length; i++) {
             uint value = arr[i];
+            uint nextSlot = i - offset;
 
-            if (!this.contains(returnArray, value)) {
-                returnArray[i - offset] = value;
+            if (i == 0 || !contains(trim(nextSlot, returnArray), value)) {
+                returnArray[nextSlot] = value;
             } else {
                 offset++;
             }
@@ -128,9 +129,11 @@ contract Lambdeth {
     function bytesToUint(bytes memory data, uint start) internal pure returns (uint) {
         require(data.length >= start + 32, "slicing out of range");
         uint val;
+
         assembly {
             val := mload(add(data, add(0x20, start)))
         }
+
         return val;
     }
 

@@ -31,7 +31,7 @@ contract LambdethTest {
     function testContains(Lambdeth lambdeth) public pure returns (bool[] memory) {
         uint[] memory testArr = new uint[](10);
         testArr[0] = 1;
-        testArr[1] = 2;
+        testArr[1] = 0;
         testArr[2] = 3;
         testArr[3] = 300;
         testArr[4] = 7000;
@@ -39,11 +39,11 @@ contract LambdethTest {
         testArr[6] = 32;
         testArr[7] = 64;
         testArr[8] = 128;
-        testArr[9] = 0;
+        testArr[9] = 10;
 
         bool[] memory result = new bool[](2);
 
-        result[0] = lambdeth.contains(testArr, 128);
+        result[0] = lambdeth.contains(testArr, 0);
         result[1] = lambdeth.contains(testArr, 17);
 
         return result;
@@ -108,7 +108,18 @@ contract LambdethTest {
         testArr[6] = 21;
         testArr[7] = 10;
         testArr[8] = 17;
-        testArr[9] = 10;
+        testArr[9] = 0;
+
+        return lambdeth.unique(testArr);
+    }
+
+    function testUniqueWithTrailingZero(Lambdeth lambdeth) public view returns (uint[] memory) {
+        uint[] memory testArr = new uint[](4);
+
+        testArr[0] = 2;
+        testArr[1] = 1;
+        testArr[2] = 2;
+        testArr[3] = 0;
 
         return lambdeth.unique(testArr);
     }
