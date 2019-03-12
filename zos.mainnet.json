@@ -1,11 +1,11 @@
 {
   "contracts": {
     "Lambdeth": {
-      "address": "0x35769a834Cb66FAC53fae482994a3942D9A2fE4F",
-      "constructorCode": "608060405234801561001057600080fd5b506112ce806100206000396000f3fe",
-      "bodyBytecodeHash": "f96de8f5a74e886f03fcac1bbb0a4958b6ba72932f4cdd74358e32c01cee9c04",
-      "localBytecodeHash": "129c47b8a09a635257ff9ac7db743cbad96f12f9d0dd228da30eceee3e54844c",
-      "deployedBytecodeHash": "129c47b8a09a635257ff9ac7db743cbad96f12f9d0dd228da30eceee3e54844c",
+      "address": "0xA6C8a3293f748e4ce0e83974D7738d912D0147C0",
+      "constructorCode": "608060405234801561001057600080fd5b50611178806100206000396000f3fe",
+      "bodyBytecodeHash": "d8ef132f69d8345da3940af5d298fbb69f5d017b02e74f79eeaf8633a7225c5d",
+      "localBytecodeHash": "1078cd7a22afd1f021363d6903309f15a67cabe486dd8e506d796d66d11fa0d8",
+      "deployedBytecodeHash": "1078cd7a22afd1f021363d6903309f15a67cabe486dd8e506d796d66d11fa0d8",
       "types": {},
       "storage": [],
       "warnings": {
@@ -18,13 +18,18 @@
     }
   },
   "solidityLibs": {},
-  "proxies": {},
-  "zosversion": "2.2",
-  "version": "0.1.0",
-  "app": {
-    "address": "0x50442F004952D5736534CC128856A49150E34bbB"
+  "proxies": {
+    "lambdeth/Lambdeth": [
+      {
+        "address": "0x37dE8af025ccFAF0bbE74Ae704fe740D52DaEC84",
+        "version": "0.2.0",
+        "implementation": "0xA6C8a3293f748e4ce0e83974D7738d912D0147C0"
+      }
+    ]
   },
-  "package": {
-    "address": "0x51d79AC0DD05e485fd74C205FC14dB640814705A"
+  "zosversion": "2.2",
+  "version": "0.2.0",
+  "proxyAdmin": {
+    "address": "0x562f40C0d5b832541F02c369552016b904452daA"
   }
 }
