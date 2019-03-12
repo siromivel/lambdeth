@@ -2,12 +2,12 @@
 process.env.NODE_ENV = 'test'
 
 const Lambdeth = artifacts.require('Lambdeth')
-const LambdethTest = artifacts.require('LambdethTest')
+const LambdethMethodTest = artifacts.require('LambdethMethodTest')
 
 contract('Lambdeth', function () {
   beforeEach(async function () {
     this.lambdeth = await Lambdeth.new({ gas: 5000000 })
-    this.lambdethTest = await LambdethTest.new({ gas: 5000000 })
+    this.lambdethTest = await LambdethMethodTest.new({ gas: 5000000 })
   })
 
   describe('concat', function() {
@@ -19,12 +19,11 @@ contract('Lambdeth', function () {
     })
   })
 
-  describe('map', function() {
-    it('should transform an array by applying a callback on every element', async function() {
-      const expected = [1**2, 2**2, 3**2, 300**2, 7000**2, 16**2, 32**2, 64**2, 128**2, 0**2]
-      const result = await this.lambdethTest.testMap(this.lambdeth.address)
+  describe('contains', function() {
+    it('should return true if an array contains the passed value', async function() {
+      const result = await this.lambdethTest.testContains(this.lambdeth.address)
 
-      expect(transformSolidityArray(result)).to.eql(expected)
+      expect(result).to.eql([true, false])
     })
   })
 
@@ -37,11 +36,12 @@ contract('Lambdeth', function () {
     })
   })
 
-  describe('contains', function() {
-    it('should return true if an array contains the passed value', async function() {
-      const result = await this.lambdethTest.testContains(this.lambdeth.address)
+  describe('map', function() {
+    it('should transform an array by applying a callback on every element', async function() {
+      const expected = [1**2, 2**2, 3**2, 300**2, 7000**2, 16**2, 32**2, 64**2, 128**2, 0**2]
+      const result = await this.lambdethTest.testMap(this.lambdeth.address)
 
-      expect(result).to.eql([true, false])
+      expect(transformSolidityArray(result)).to.eql(expected)
     })
   })
 
@@ -69,6 +69,8 @@ contract('Lambdeth', function () {
       expect(transformSolidityArray(result)).to.eql(expected)
     })
   })
+
+  
 })
 
 function transformSolidityArray(arr) {

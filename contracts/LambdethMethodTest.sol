@@ -4,10 +4,10 @@ import "./Lambdeth.sol";
 
 
 /**
- * @title LambdethTest
+ * @title LambdethMethodTest
  * @dev Wrapper contract for testing Lambdeth methods. Necessary for passing bytes4 function signature.
  */
-contract LambdethTest {
+contract LambdethMethodTest {
 
     function testConcat(Lambdeth lambdeth) public pure returns (uint[] memory) {
         uint[] memory testArr1 = new uint[](5);
@@ -97,7 +97,7 @@ contract LambdethTest {
         return lambdeth.slice(testArr, 3, 7);
     }
 
-    function testUnique(Lambdeth lambdeth) public view returns (uint[] memory) {
+    function testUnique(Lambdeth lambdeth) public pure returns (uint[] memory) {
         uint[] memory testArr = new uint[](10);
         testArr[0] = 1;
         testArr[1] = 5;
@@ -113,7 +113,7 @@ contract LambdethTest {
         return lambdeth.unique(testArr);
     }
 
-    function testUniqueWithTrailingZero(Lambdeth lambdeth) public view returns (uint[] memory) {
+    function testUniqueWithTrailingZero(Lambdeth lambdeth) public pure returns (uint[] memory) {
         uint[] memory testArr = new uint[](4);
 
         testArr[0] = 2;

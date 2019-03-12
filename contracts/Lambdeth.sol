@@ -98,7 +98,7 @@ contract Lambdeth {
     /**
      * @dev Returns an array containing no more than 1 entry for any value
      */
-    function unique(uint[] memory arr) public view returns (uint[] memory) {
+    function unique(uint[] memory arr) public pure returns (uint[] memory) {
         uint length = arr.length;
         uint offset = 0;
         uint[] memory returnArray = new uint[](length);
