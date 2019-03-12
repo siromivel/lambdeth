@@ -60,7 +60,7 @@ contract Lambdeth {
             }
         }
 
-        return trim(length - offset, filterArray);
+        return slice(filterArray, 0, length - offset);
     }
 
     /**
@@ -107,14 +107,14 @@ contract Lambdeth {
             uint value = arr[i];
             uint nextSlot = i - offset;
 
-            if (i == 0 || !contains(trim(nextSlot, returnArray), value)) {
+            if (i == 0 || !contains(slice(returnArray, 0, nextSlot), value)) {
                 returnArray[nextSlot] = value;
             } else {
                 offset++;
             }
         }
 
-        return trim(length - offset, returnArray);
+        return slice(returnArray, 0, length - offset);
     }
 
     // Converts bytes into bool
@@ -135,16 +135,5 @@ contract Lambdeth {
         }
 
         return val;
-    }
-
-    // Returns a trimmed array
-    function trim(uint length, uint[] memory arr) internal pure returns(uint[] memory) {
-        uint[] memory returnArray = new uint[](length);
-
-        for (uint i = 0; i < length; i++) {
-            returnArray[i] = arr[i];
-        }
-
-        return returnArray;
     }
 }
