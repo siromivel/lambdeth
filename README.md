@@ -28,7 +28,7 @@ Returns a new array containing only 1 copy of each value present in the original
 ____________________________________________________________________________________________________________________________________
 # Usage
 
-This library relies on ZeppelinOS and Truffle, as well as the software that supports these services. However, The necessary depenedencies should be contained in the files and no installations should be necessary for use.
+Install via NPM for use in projects built on ZeppelinOS: `npm install lambdeth`.
 
 To use a function from the library:
     Lambdeth.{functionName}
