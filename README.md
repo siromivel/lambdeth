@@ -32,6 +32,3 @@ This library relies on ZeppelinOS and Truffle, as well as the software that supp
 
 To use a function from the library:
     Lambdeth.{functionName}
-    
- A note about gas:
- You will pay gas in order to use these functions.
