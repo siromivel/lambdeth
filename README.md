@@ -1,6 +1,8 @@
 # Lambdeth
 
-Lambdeth is a functional library built in Solidity. It uses tools from ZeppelinOS and Truffle.
+Lambdeth is a functional library built in Solidity.
+
+Install for use through ZeppelinOS via npm: https://www.npmjs.com/package/lambdeth
 
 ## Methods
 
